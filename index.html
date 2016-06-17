@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New Firebase!</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+</head>
+<body>
+
+
+<div id="count"></div>
+<button id="button">push!</button>
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-database.js"></script>
+<script>
+
+	// Initialize Firebase
+	var config = {
+		apiKey: "AIzaSyCtGKBN_25zcTKmsKEYFfajrO7vxxVsyak",
+		authDomain: "kevins-test-project-6c09d.firebaseapp.com",
+		databaseURL: "https://kevins-test-project-6c09d.firebaseio.com",
+		storageBucket: "kevins-test-project-6c09d.appspot.com",
+	};
+	firebase.initializeApp(config);
+
+	var database = firebase.database();
+
+
+	var clickcounter = 0;
+
+	$("#button").click(function() {
+
+		clickcounter++;
+		// alert(clickcounter)
+
+		database.ref().set({
+			clicks: clickcounter
+		})
+	})
+
+
+	database.ref().on('value', function(snapshot) {
+		console.log(snapshot.val().clicks)
+		$("#count").text(snapshot.val().clicks)
+	})
+
+
+
+</script>
+    
+<script src="app.js"></script>
+</body>
+</html>
